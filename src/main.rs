@@ -57,6 +57,12 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
     if game_state.lost {
         return;
     }
+
+    let offset = ((engine.time_since_startup_f64 * 2.0).cos() * 5.0) as f32;
+    let health_message = engine.texts.get_mut("health_message").unwrap();
+    health_message.translation.x = engine.window_dimensions.x / 2.0 - 80.0;
+    health_message.translation.y = engine.window_dimensions.y / 2.0 - 30.0 + offset;
+
     let mut direction = 0.0;
     if engine.keyboard_state.pressed(KeyCode::Up) {
         direction += 1.0;
